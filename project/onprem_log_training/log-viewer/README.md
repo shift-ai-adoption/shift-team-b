@@ -18,6 +18,14 @@
 
 ---
 
+## 研修環境の全体構成
+
+![onprem_log_training アーキテクチャ](docs/architecture.png)
+
+> 詳細なアーキテクチャ図ソース: [docs/architecture.html](docs/architecture.html)（ブラウザで開くとインタラクティブに確認できます）
+
+---
+
 ## ディレクトリ構成
 
 ```
