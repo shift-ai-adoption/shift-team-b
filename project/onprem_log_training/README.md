@@ -41,7 +41,7 @@ onprem_log_training/
 |---|---|---|---|
 | **client**（アプリ層） | `onprem-log-training-client` | `:3002` | `client/logs/app.log`（ホストbind mount） |
 | **server**（業務ロジック層） | `onprem-log-training-server` | `:4002`（HTTP）/ `:5101`（SSH） | コンテナ内 `/app/logs/service.log` |
-| **log-viewer**（ダッシュボード） | `onprem-log-viewer` | `:8090` | — |
+| **log-viewer**（ダッシュボード） | `onprem-log-viewer` | `${LOG_VIEWER_PORT:-8090}`（デフォルト`:8090`） | — |
 
 ---
 
@@ -91,12 +91,12 @@ cd docker
 docker-compose up -d --build
 ```
 
-ブラウザで以下のURLにアクセスします。
+ブラウザで以下のURLにアクセスします（`<外部ドメイン>` は環境に応じて読み替えてください）。
 
 | サービス | URL |
 |---|---|
-| RoboMart ECサイト | `http://localhost:3002/` |
-| Log Viewer ダッシュボード | `http://localhost:8090/` |
+| RoboMart ECサイト | `http://<外部ドメイン>:3002/` |
+| Log Viewer ダッシュボード | `http://<外部ドメイン>:<LOG_VIEWER_PORT>/` |
 
 停止・削除:
 
@@ -121,7 +121,6 @@ PORT=3002 SERVER_BASE_URL=http://localhost:4002 node server.js &
 # log-viewerを起動
 cd ../log-viewer
 node server.js
-# → http://localhost:8090/
 ```
 
 `client/logs/app.log` はホストに直接書き込まれるため、log-viewer はコンテナなしでも実ログを読めます。
