@@ -87,6 +87,7 @@ server  (受け取った ABC1234 を自分のログにも記録)
 
 ```bash
 cp .env.example .env
+# 必要に応じて .env の LOG_VIEWER_PORT を環境のSG/ファイアウォールで開放済みのポートに変更する
 cd docker
 docker-compose up -d --build
 ```

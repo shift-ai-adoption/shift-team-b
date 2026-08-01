@@ -50,7 +50,8 @@ cd ../docker
 docker-compose up -d --build
 ```
 
-ブラウザで `http://<ホスト名>:<PORT>/` を開きます（ポートは `.env` の `LOG_VIEWER_PORT` で指定）。
+ブラウザで `http://<外部ドメイン>:<LOG_VIEWER_PORT>/` を開きます。  
+`LOG_VIEWER_PORT` は `.env` の `LOG_VIEWER_PORT` で指定してください（環境のSG/ファイアウォールで開放済みのポートに合わせること）。
 
 ### ローカル起動（Dockerなし）
 
