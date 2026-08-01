@@ -183,11 +183,6 @@ statsAnalyzer.js
 
 ## 注意事項
 
-- `client/logs/app.log` のパーミッションが `root` 所有で書き込み不可の場合、
-  clientコンテナがログを書けずに 500 エラーを返します。起動後に問題が出た場合は以下を実行してください：
-  ```bash
-  chmod 666 client/logs/app.log
-  ```
 - SSH未接続時（serverコンテナ未起動など）は `serverReachable: false` でインシデント一覧の
   `serverLogs` が空配列になりますが、ダッシュボード自体はクラッシュしません。
 - ログが空の場合（コンテナ起動直後など）、全集計値は `0` / `null` で正常レスポンスします。
