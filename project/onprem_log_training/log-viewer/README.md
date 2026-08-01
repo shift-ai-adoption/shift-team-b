@@ -1,7 +1,10 @@
 # log-viewer — ログ可視化ダッシュボード
 
-`onprem_log_training` 環境のログをリアルタイムで可視化する Node.js + Express 製ダッシュボードです。
-研修の**完成物サンプル**として実装されており、受講者が自作するログ収集ツールの参考実装にもなります。
+`onprem_log_training` 研修環境のログをリアルタイムで可視化する Node.js + Express 製ダッシュボードです。
+
+このダッシュボードは、RoboMart（架空のロボット販売ECサイト）の研修用ログ出力環境を実際に使いながら
+**ログ収集・分析ツールをAIエージェントと共に作る学習**のために構築しました。
+受講者が自作するログ収集ツールの参考実装としても活用できます。
 
 ---
 
@@ -47,7 +50,7 @@ cd ../docker
 docker-compose up -d --build
 ```
 
-ブラウザで `http://localhost:8090/` を開きます（ポートは `.env` の `LOG_VIEWER_PORT` で変更可）。
+ブラウザで `http://<ホスト名>:<PORT>/` を開きます（ポートは `.env` の `LOG_VIEWER_PORT` で指定）。
 
 ### ローカル起動（Dockerなし）
 
@@ -56,7 +59,6 @@ docker-compose up -d --build
 ```bash
 cd log-viewer
 node server.js
-# → http://localhost:8090/
 ```
 
 > **前提:** `client/logs/app.log` がホストに存在すること（clientを先に起動してください）。
@@ -92,8 +94,8 @@ node server.js
   "totalRequests": 142,
   "errorCount": 18,
   "errorRate": "12.7%",
-  "startTime": "2026-07-25T08:55:00.000Z",
-  "endTime":   "2026-07-25T09:30:45.123Z",
+  "startTime": "2026-07-25T09:00:00.000+09:00",
+  "endTime":   "2026-07-25T09:30:45.123+09:00",
   "durationMinutes": 35.75,
   "serverReachable": true,
   "levelCounts": { "ERROR": 18, "INFO": 120, "WARN": 4, "DEBUG": 0, "UNKNOWN": 0 },
@@ -139,16 +141,16 @@ node server.js
 
 ## ログフォーマット
 
-`onprem_log_training` のログはすべて以下の形式で出力されます。
+`onprem_log_training` のログはすべて以下の形式で出力されます（タイムスタンプはJST）。
 
 ```
-<ISO8601タイムスタンプ> <LEVEL> TrackID:<7文字> [<パス>] method=<メソッド> key=value ...
+<ISO8601タイムスタンプ+09:00> <LEVEL> TrackID:<7文字> [<パス>] method=<メソッド> key=value ...
 ```
 
 例:
 
 ```
-2026-07-25T09:00:00.123Z ERROR TrackID:ABC1234 [/api/robots/RBT-DOG-02] method=GET status=500 err=TypeError: Cannot read properties of undefined (reading 'map')
+2026-08-02T07:37:07.869+09:00 ERROR TrackID:ABC1234 [/api/robots/RBT-DOG-02] method=GET status=500 err=TypeError: Cannot read properties of undefined (reading 'map')
 ```
 
 - **TrackID正規表現:** `TrackID:([A-Z0-9]{7})`
