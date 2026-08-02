@@ -82,7 +82,7 @@ services:
       dockerfile: Dockerfile
     container_name: onprem-log-viewer
     ports:
-      - "${LOG_VIEWER_PORT:-8090}:8090"
+      - "${LOG_VIEWER_PORT:-8001}:8090"
     volumes:
       - ../client/logs:/app/client-logs:ro
       - ../docker/sample-data:/app/ssh-keys:ro
