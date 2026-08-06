@@ -4,6 +4,19 @@
 const POLL_INTERVAL = 10000; // 10秒ポーリング（プルダウン未選択時のフォールバック）
 let incidents = [];
 
+// ===== デジタル時計（JST） =====
+function updateClock() {
+  const el = document.getElementById('liveClock');
+  if (!el) return;
+  el.textContent = new Date().toLocaleString('ja-JP', {
+    timeZone: 'Asia/Tokyo',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+  });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
 // --- DOM refs ---
 const tableBody      = document.getElementById('tableBody');
 const detailPanel    = document.getElementById('detailPanel');
