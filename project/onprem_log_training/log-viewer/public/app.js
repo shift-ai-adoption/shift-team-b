@@ -1,7 +1,7 @@
 // public/app.js
 'use strict';
 
-const POLL_INTERVAL = 10000; // 10秒ポーリング
+const POLL_INTERVAL = 10000; // 10秒ポーリング（プルダウン未選択時のフォールバック）
 let incidents = [];
 
 // --- DOM refs ---
@@ -145,6 +145,15 @@ async function refresh() {
   }
 }
 
-// 初回 + 定期更新
+// 初回 + 定期更新（間隔はヘッダのプルダウンで切替）
+let pollTimer = null;
+function startPolling() {
+  if (pollTimer) clearInterval(pollTimer);
+  const sel = document.getElementById('pollInterval');
+  const ms  = sel ? parseInt(sel.value, 10) : POLL_INTERVAL;
+  pollTimer = setInterval(refresh, Number.isFinite(ms) ? ms : POLL_INTERVAL);
+}
+const pollIntervalEl = document.getElementById('pollInterval');
+if (pollIntervalEl) pollIntervalEl.addEventListener('change', startPolling);
 refresh();
-setInterval(refresh, POLL_INTERVAL);
+startPolling();

@@ -14,6 +14,12 @@
         <input type="checkbox" id="errorsOnly" checked />
         ERRORのみ表示
       </label>
+      <select id="pollInterval">
+        <option value="5000">5秒</option>
+        <option value="10000" selected>10秒（デフォルト）</option>
+        <option value="30000">30秒</option>
+        <option value="60000">60秒</option>
+      </select>
       <button id="refreshBtn">🔄 更新</button>
       <span id="lastUpdated" class="last-updated"></span>
     </div>
