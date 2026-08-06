@@ -93,13 +93,24 @@ function renderTable(data) {
 }
 
 // ===== 詳細パネル =====
+function colorizeLog(lines) {
+  return lines.map(line => {
+    let cls = '';
+    if (/ERROR/.test(line))      cls = 'log-line-error';
+    else if (/WARN/.test(line))  cls = 'log-line-warn';
+    else if (/INFO/.test(line))  cls = 'log-line-info';
+    else if (/DEBUG/.test(line)) cls = 'log-line-debug';
+    return `<span class="${cls}">${escHtml(line)}</span>`;
+  }).join('\n');
+}
+
 function showDetail(trackId) {
   const inc = incidents.find(i => i.trackId === trackId);
   if (!inc) return;
 
   detailTrackId.textContent  = trackId;
-  clientLogEl.textContent    = inc.clientLogs.join('\n') || '（データなし）';
-  serverLogEl.textContent    = inc.serverLogs.join('\n') || '（SSH未接続またはデータなし）';
+  clientLogEl.innerHTML      = colorizeLog(inc.clientLogs) || '（データなし）';
+  serverLogEl.innerHTML      = colorizeLog(inc.serverLogs) || '（SSH未接続またはデータなし）';
 
   detailPanel.classList.remove('hidden');
   detailPanel.scrollIntoView({ behavior: 'smooth' });
