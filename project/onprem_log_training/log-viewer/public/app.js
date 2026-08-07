@@ -32,6 +32,7 @@ function renderSummary(s) {
 
   document.getElementById('valTotal').textContent    = s.totalRequests;
   document.getElementById('valError').textContent    = s.errorCount;
+  document.getElementById('valWarn').textContent     = s.warnCount ?? '—';
   document.getElementById('valRate').textContent     = s.errorRate;
   document.getElementById('valStart').textContent    = fmtTime(s.startTime);
   document.getElementById('valEnd').textContent      = fmtTime(s.endTime);

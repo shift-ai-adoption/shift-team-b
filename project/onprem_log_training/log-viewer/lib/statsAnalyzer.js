@@ -71,6 +71,7 @@ function buildSummary(incidents, serverReachable = false) {
 
   const totalRequests = incidents.length;
   const errorCount = levelCounts.ERROR;
+  const warnCount = levelCounts.WARN;
   const errorRate = totalRequests > 0
     ? `${(errorCount / totalRequests * 100).toFixed(1)}%`
     : '0%';
@@ -78,6 +79,7 @@ function buildSummary(incidents, serverReachable = false) {
   return {
     totalRequests,
     errorCount,
+    warnCount,
     errorRate,
     startTime,
     endTime,

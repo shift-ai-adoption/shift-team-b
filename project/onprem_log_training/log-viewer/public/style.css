@@ -71,6 +71,7 @@ button:hover { background: #3a4070; }
 }
 .card:hover { border-color: #4a5080; }
 .card-error { border-color: #7f1d1d; background: #1a0f0f; }
+.card-warn  { border-color: #78350f; background: #1a150a; }
 .card-time { border-color: #1e3a5f; }
 .card-val {
   font-size: 1.8rem;
@@ -92,6 +93,7 @@ button:hover { background: #3a4070; }
   letter-spacing: 0.05em;
 }
 .card-error .card-val { color: #fca5a5; }
+.card-warn .card-val { color: #fcd34d; }
 
 /* ===== Ranking Area ===== */
 .ranking-area {
